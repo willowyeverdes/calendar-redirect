@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function redirectToCalendar() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Detect Apple devices (iPhone, iPad, Mac)
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "calshow://";
+                return;
+            }
+
+            // Detect Android devices (Google Calendar or Default Calendar)
+            if (/android/i.test(userAgent)) {
+                window.location.href = "content://com.android.calendar/time/";
+                return;
+            }
+
+            // Default: Open Google Calendar (Web & Desktop)
+            window.location.href = "https://www.google.com/calendar/render?action=TEMPLATE&text=Event+Title&details=Event+Details&dates=20250215T120000Z/20250215T130000Z";
+        }
+    </script>
+</head>
+<body onload="redirectToCalendar()">
+    <p>If you are not redirected, <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Event+Title&details=Event+Details&dates=20250215T120000Z/20250215T130000Z">click here</a>.</p>
+</body>
+</html>
